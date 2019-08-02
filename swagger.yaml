@@ -1,0 +1,50 @@
+swagger: "2.0"
+
+info:
+  version: 1.0.0
+  title: UserPostApp
+  description: An API for users to send Posts and read other users Posts
+
+paths: 
+  /register:
+    post:
+      summary: Register a user in database
+      description: Gets a user from a completed form with data and register his account on a database to be used.
+      parameters:
+        - name: User
+          in: body
+          description: The user name.
+          schema:
+            $ref: "#/definitions/User"
+      responses: 
+        201:
+          description: Return the registered user
+        400:
+          description: Return an error
+        500:
+          $ref: "#/responses/Standard500ErrorResponse"
+
+definitions:
+  User: 
+    items:
+      required:
+        - name
+        - nickname
+      properties:
+        name:
+          type: string
+        nickname:
+          type: string
+
+  Error:
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+
+responses:
+  Standard500ErrorResponse:
+    description: An unexpected error occured.
+    schema:
+      $ref: "#/definitions/Error"

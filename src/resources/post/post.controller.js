@@ -12,6 +12,7 @@ export const createPost = async (req, res) => {
     })
     res.status(201).send({ data: doc })
   } catch (e) {
+    // ERROR
     console.error(e)
     res.status(400).end()
   }
@@ -34,6 +35,7 @@ export const getAllPosts = async (req, res) => {
     })
     res.status(200).send({ data: newDoc })
   } catch (e) {
+    // ERROR
     console.error(e)
     res.status(400).end()
   }
@@ -52,6 +54,7 @@ export const editPost = async (req, res) => {
       .exec()
     res.status(200).send({ data: doc })
   } catch (e) {
+    // ERROR
     console.error(e)
     res.status(400).end()
   }

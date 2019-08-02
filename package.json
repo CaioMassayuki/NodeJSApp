@@ -3,21 +3,22 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "author": "Caio Massayuki <caiomassayuki.y@gmail.com>",
+  "license": "ISC",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --exec yarn restart",
+    "prod": "cross-env NODE_ENV=production nodemon --exec yarn restart",
     "restart": "rimraf dist && yarn build && yarn start",
-    "build": "babel src --out-dir dist",
+    "build": "babel src --out-dir dist && cp ./swagger.yaml ./dist",
     "start": "node dist/index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "mongoose": "^5.6.5",
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -26,6 +27,11 @@
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
-    "rimraf": "^2.6.3"
+    "cross-env": "^5.2.0",
+    "eslint-plugin-security": "^1.4.0",
+    "logform": "^2.1.2",
+    "rimraf": "^2.6.3",
+    "swagger-ui-express": "^4.0.7",
+    "yamljs": "^0.3.0"
   }
 }

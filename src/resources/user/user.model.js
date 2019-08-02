@@ -3,10 +3,14 @@ import mongoose from 'mongoose'
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true
+    required: true,
+    index: {
+      unique: true
+    }
   },
   nickname: {
-    type: String
+    type: String,
+    required: true
   }
 })
 
