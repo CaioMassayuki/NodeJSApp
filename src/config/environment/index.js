@@ -20,7 +20,6 @@ switch (env) {
 
 const baseConfig = {
   env,
-  port: 3000,
   secrets: {},
   envConfig,
 }

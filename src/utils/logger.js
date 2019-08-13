@@ -8,6 +8,7 @@ const Logger = Winston.createLogger({
     new Winston.transports.File({ filename: 'application.log' }),
   ],
   exceptionHandlers: [
+    new Winston.transports.Console({ format: Winston.format.cli() }),
     new Winston.transports.File({
       filename: 'exceptions.log',
       format: Winston.format.json(),

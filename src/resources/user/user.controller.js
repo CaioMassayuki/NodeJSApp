@@ -37,7 +37,7 @@ export const getUser = async (req, res) => {
       res.set('Authorization', doc._id )
       return res.status(200).send({ data: doc })
     }
-    return res.status(200).send({ message: 'User not found!' })
+    return res.status(204).send({ message: 'User not found!' })
   } catch (error) {
     const errorMessage = error.description || error.message
     Logger.error(errorMessage)

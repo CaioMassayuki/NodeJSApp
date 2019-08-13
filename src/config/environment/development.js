@@ -1,4 +1,5 @@
 import { MONGODB_PATH } from '../constants'
 export const config = {
-  dbUrl: `${MONGODB_PATH}/dev-userpostapp`
+  dbUrl: `${MONGODB_PATH}/dev-userpostapp`,
+  port: 3000
 }

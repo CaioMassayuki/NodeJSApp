@@ -6,7 +6,8 @@
   "author": "Caio Massayuki <caiomassayuki.y@gmail.com>",
   "license": "ISC",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cross-env NODE_ENV=test && jest --watch",
+    "test:ci": "cross-env NODE_ENV=test && jest --coverage",
     "dev": "nodemon --exec yarn restart",
     "prod": "cross-env NODE_ENV=production nodemon --exec yarn restart",
     "restart": "rimraf dist && yarn build && yarn start",
@@ -27,11 +28,24 @@
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
+    "babel-jest": "^24.8.0",
     "cross-env": "^5.2.0",
     "eslint-plugin-security": "^1.4.0",
+    "jest": "^24.8.0",
     "logform": "^2.1.2",
+    "request": "^2.88.0",
     "rimraf": "^2.6.3",
+    "supertest": "^4.0.2",
     "swagger-ui-express": "^4.0.7",
     "yamljs": "^0.3.0"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
+    "testPathIgnorePatterns": [
+      "dist/"
+    ],
+    "testEnvironment": "node"
   }
 }

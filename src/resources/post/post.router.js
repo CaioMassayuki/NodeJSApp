@@ -5,7 +5,7 @@ const router = Router()
 
 router.route('/').get(getAllPosts)
 router
-  .route('/create')
+  .route('/user')
   .post(createPost)
   .put(editPost)
 
