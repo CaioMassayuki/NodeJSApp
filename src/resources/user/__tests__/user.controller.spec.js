@@ -1,11 +1,16 @@
-import { createUser } from '../user.controller'
-import { User } from '../user.model'
 import request from 'supertest'
-import { server } from '../../../server'
+import { expect } from 'chai'
+import app from '../../../app'
+import { User } from '../user.model'
 
-describe('User Controller', () => {
-  it('Should register new user', done => {
-    const data = {name: 'TESTUSER', nickname: 'TESTNICKNAME'}
-    request(server).post('/register', data).expect(201, done)
+describe('User controller', () => {
+  it('Should create a user', done => {
+    request(app)
+      .post('/register')
+      .send({ name: 'NAMETEST', nickname: 'NICKNAMETEST' })
+      .end((err, res) => {
+        expect(res.status).to.equal(201)
+        done()
+      })
   })
 })
