@@ -1,15 +1,23 @@
-import request from 'supertest'
-import { expect } from 'chai'
+import chai from 'chai'
+import chaiHttp from 'chai-http'
+import User from '../user.model'
 import app from '../../../app'
-import { User } from '../user.model'
+import mongoose from 'mongoose'
+const expect = chai.expect
+chai.use(chaiHttp)
 
 describe('User controller', () => {
+  afterEach(done => {
+    mongoose.connection.db.dropDatabase()
+    done()
+  })
   it('Should create a user', done => {
-    request(app)
-      .post('/register')
+    chai
+      .request(app)
+      .post('/api/user/register')
       .send({ name: 'NAMETEST', nickname: 'NICKNAMETEST' })
       .end((err, res) => {
-        expect(res.status).to.equal(201)
+        expect(res.status).to.be.eq(201)
         done()
       })
   })

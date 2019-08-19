@@ -2,6 +2,7 @@ import express from 'express'
 import { json, urlencoded } from 'body-parser'
 import swaggerUi from 'swagger-ui-express'
 import YAML from 'yamljs'
+import connect from './utils/dbConnect'
 import userRouter from './resources/user/user.router'
 import postRouter from './resources/post/post.router'
 
@@ -13,5 +14,7 @@ app.use(urlencoded({ extended: true }))
 app.use('/api-swagger', swaggerUi.serve, swaggerUi.setup(swaggerDoc))
 app.use('/api/user', userRouter)
 app.use('/api/post', postRouter)
+
+connect()
 
 export default app

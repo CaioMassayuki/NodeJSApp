@@ -6,14 +6,14 @@ const Logger = Winston.createLogger({
   transports: [
     new Winston.transports.Console({ format: Winston.format.cli() }),
     new Winston.transports.File({ filename: 'application.log' }),
-  ],
-  exceptionHandlers: [
-    new Winston.transports.Console({ format: Winston.format.cli() }),
-    new Winston.transports.File({
-      filename: 'exceptions.log',
-      format: Winston.format.json(),
-    }),
-  ],
+  ]
+  // exceptionHandlers: [
+  //   new Winston.transports.Console({ format: Winston.format.prettyPrint() }),
+  //   new Winston.transports.File({
+  //     filename: 'exceptions.log',
+  //     format: Winston.format.json(),
+  //   }),
+  // ],
 })
 
 export default Logger
