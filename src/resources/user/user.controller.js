@@ -23,7 +23,7 @@ const validadeParameters = req => {
     )
 }
 
-const errorMessageHandler = error => {
+const generateErrorMessage = error => {
   let errorMessage = error.description || error.message || error.errmsg
   Logger.error(errorMessage)
   if (error.code === 11000) {
@@ -39,11 +39,11 @@ export const createUser = async (req, res) => {
       name: req.body.name,
       nickname: req.body.nickname,
     })
-    res.status(201).json({ data: doc })
+    res.status(201).json({ name: doc.name, nickname: doc.nickname })
   } catch (error) {
     res
       .status(error.httpCode || 400)
-      .send({ message: errorMessageHandler(error) })
+      .send({ message: generateErrorMessage(error) })
   }
 }
 
@@ -62,6 +62,6 @@ export const getUser = async (req, res) => {
   } catch (error) {
     res
       .status(error.httpCode || 400)
-      .send({ message: errorMessageHandler(error) })
+      .send({ message: generateErrorMessage(error) })
   }
 }

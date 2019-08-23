@@ -6,7 +6,7 @@
   "author": "Caio Massayuki <caiomassayuki.y@gmail.com>",
   "license": "ISC",
   "scripts": {
-    "test": "cross-env NODE_ENV=test nodemon --exec mocha --require @babel/register ./src/**/__tests__/*.spec.js --timeout 10000",
+    "test": "cross-env NODE_ENV=test nodemon --exec mocha --file test-setup.js --require @babel/register ./src/**/__tests__/*.spec.js --timeout 60000",
     "dev": "nodemon --exec yarn restart",
     "prod": "cross-env NODE_ENV=production nodemon --exec yarn restart",
     "restart": "rimraf dist && yarn build && yarn start",

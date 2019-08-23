@@ -1,23 +1,72 @@
 import chai from 'chai'
-import chaiHttp from 'chai-http'
-import User from '../user.model'
+import request from 'supertest'
 import app from '../../../app'
 import mongoose from 'mongoose'
 const expect = chai.expect
-chai.use(chaiHttp)
 
 describe('User controller', () => {
-  afterEach(done => {
+  after(done => {
     mongoose.connection.db.dropDatabase()
     done()
   })
+  it('Should warn if request does not have name', done => {
+    request(app)
+      .post('/api/user/register')
+      .send({ nickname: 'NICKNAMETEST' })
+      .end((err, res) => {
+        expect(res.status).to.be.equals(400)
+        expect(res.body).to.be.eql({
+          message: '{Name} parameter missing!',
+        })
+        done()
+      })
+  })
+  it('Should warn if request does not have nickname', done => {
+    request(app)
+      .post('/api/user/register')
+      .send({ name: 'NAMETEST' })
+      .end((err, res) => {
+        expect(res.status).to.be.equals(400)
+        expect(res.body).to.be.eql({
+          message: '{Nickname} parameter missing!',
+        })
+        done()
+      })
+  })
+  it('Should warn if request does not have name or nickname', done => {
+    request(app)
+      .post('/api/user/register')
+      .send({ })
+      .end((err, res) => {
+        expect(res.status).to.be.equals(400)
+        expect(res.body).to.be.eql({
+          message: '{Name}, {Nickname} parameters missing!',
+        })
+        done()
+      })
+  })
   it('Should create a user', done => {
-    chai
-      .request(app)
+    request(app)
       .post('/api/user/register')
       .send({ name: 'NAMETEST', nickname: 'NICKNAMETEST' })
       .end((err, res) => {
-        expect(res.status).to.be.eq(201)
+        expect(res.status).to.be.equals(201)
+        expect(res.body).to.be.eql({
+          name: 'NAMETEST',
+          nickname: 'NICKNAMETEST',
+        })
+        done()
+      })
+  })
+  it('Should warn if user already exists when creating user', done => {
+    request(app)
+      .post('/api/user/register')
+      .send({ name: 'NAMETEST', nickname: 'NICKNAMETEST' })
+      .end((err, res) => {
+        expect(res.status).to.be.eq(400)
+        expect(res.body).to.be.eql({
+          message: 'User already exist in the Application',
+        })
         done()
       })
   })
