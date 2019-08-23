@@ -1,4 +1,4 @@
-import Logger from './utils/logger'
+import Logger from './config/logger'
 import config from './config/environment'
 import app from './app'
 

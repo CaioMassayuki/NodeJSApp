@@ -3,9 +3,9 @@ import { createPost, editPost, getAllPosts } from './post.controller'
 
 const router = Router()
 
-router.route('/').get(getAllPosts)
 router
-  .route('/user')
+  .route('/')
+  .get(getAllPosts)
   .post(createPost)
   .put(editPost)
 

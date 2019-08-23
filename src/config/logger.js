@@ -1,7 +1,6 @@
 import Winston from 'winston'
 import { format } from 'logform'
 
-
 const Logger = Winston.createLogger({
   format: format.combine(format.timestamp(), format.prettyPrint()),
   transports: [

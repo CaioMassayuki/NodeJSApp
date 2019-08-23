@@ -1,10 +1,10 @@
 class ErrorHandler {
-  constructor(name, httpCode, description) {
+  constructor(name, description, httpCode) {
     Error.call(this);
     Error.captureStackTrace(this);
     this.name = name;
-    this.httpCode = httpCode;
     this.description = description;
+    this.httpCode = httpCode;
   }
 }
 ErrorHandler.prototype.__proto__ = Error.prototype

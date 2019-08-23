@@ -1,40 +1,12 @@
 import User from './user.model'
-import ErrorHandler from '../../utils/errorHandler'
-import Logger from '../../utils/logger'
+import validateBodyParam from '../../utils/validateBodyParam'
+import generateErrorMessage from '../../utils/generateErrorMessage'
 
-const validadeParameters = req => {
-  if (!req.body.name && !req.body.nickname)
-    throw new ErrorHandler(
-      'Missing Parameters',
-      400,
-      '{Name}, {Nickname} parameters missing!',
-    )
-  if (!req.body.name)
-    throw new ErrorHandler(
-      'Missing Parameters',
-      400,
-      '{Name} parameter missing!',
-    )
-  if (!req.body.nickname)
-    throw new ErrorHandler(
-      'Missing Parameters',
-      400,
-      '{Nickname} parameter missing!',
-    )
-}
-
-const generateErrorMessage = error => {
-  let errorMessage = error.description || error.message || error.errmsg
-  Logger.error(errorMessage)
-  if (error.code === 11000) {
-    errorMessage = 'User already exist in the Application'
-  }
-  return errorMessage
-}
+const REQUIRED_PARAMS = ['name', 'nickname']
 
 export const createUser = async (req, res) => {
   try {
-    validadeParameters(req)
+    validateBodyParam(req.body, REQUIRED_PARAMS)
     const doc = await User.create({
       name: req.body.name,
       nickname: req.body.nickname,
@@ -49,16 +21,16 @@ export const createUser = async (req, res) => {
 
 export const getUser = async (req, res) => {
   try {
-    validadeParameters(req)
+    validateBodyParam(req.body, REQUIRED_PARAMS)
     const doc = await User.findOne({
       name: req.body.name,
       nickname: req.body.nickname,
     }).exec()
     if (doc) {
       res.set('Authorization', doc._id)
-      return res.status(200).send({ data: doc })
+      return res.status(200).send({ name: doc.name, nickname: doc.nickname })
     }
-    return res.status(204).send({ message: 'User not found!' })
+    return res.status(204).send({ message: 'Usuário não encontrado!' })
   } catch (error) {
     res
       .status(error.httpCode || 400)

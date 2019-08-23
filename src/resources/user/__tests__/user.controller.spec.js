@@ -16,7 +16,7 @@ describe('User controller', () => {
       .end((err, res) => {
         expect(res.status).to.be.equals(400)
         expect(res.body).to.be.eql({
-          message: '{Name} parameter missing!',
+          message: '{NAME} | Parameter Missing!',
         })
         done()
       })
@@ -28,7 +28,7 @@ describe('User controller', () => {
       .end((err, res) => {
         expect(res.status).to.be.equals(400)
         expect(res.body).to.be.eql({
-          message: '{Nickname} parameter missing!',
+          message: '{NICKNAME} | Parameter Missing!',
         })
         done()
       })
@@ -40,7 +40,7 @@ describe('User controller', () => {
       .end((err, res) => {
         expect(res.status).to.be.equals(400)
         expect(res.body).to.be.eql({
-          message: '{Name}, {Nickname} parameters missing!',
+          message: '{NAME} {NICKNAME} | Parameter Missing!',
         })
         done()
       })
