@@ -1,9 +1,27 @@
 {
   "presets": [
-    ["@babel/env", {
-      "targets": {
-        "node": "current"
+    [
+      "@babel/env",
+      {
+        "targets": {
+          "node": "current"
+        }
       }
-    }]
+    ]
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "utils": "./src/utils",
+          "models": "./src/models",
+          "config": "./src/config",
+          "middlewares": "./src/middlewares",
+          "commands": "./src/controllers/commands",
+          "queries": "./src/controllers/queries"
+        }
+      }
+    ]
   ]
 }

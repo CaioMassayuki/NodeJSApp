@@ -1,11 +1,7 @@
-import { Post } from './post.model'
-import validateBodyParam from '../../utils/validateBodyParam'
-import generateErrorMessage from '../../utils/generateErrorMessage'
-
-const REQUIRED_PARAMS = ['title']
+import Post from 'models/post'
+import generateErrorMessage from 'utils/generateErrorMessage'
 
 export const createPost = async (req, res) => {
-  validateBodyParam(req.body, REQUIRED_PARAMS)
   try {
     const doc = await Post.create({
       title: req.body.title,
@@ -33,7 +29,7 @@ export const getAllPosts = async (req, res) => {
         createdBy: item.createdBy.name,
         createdAt: item.createdAt,
         updatedAt: item.updatedAt,
-        canEdit: item.createdBy._id == req.headers.authorization,
+        canEdit: item.createdBy._id === req.headers.authorization,
       }
     })
     res.status(200).send(newDoc)
@@ -45,7 +41,6 @@ export const getAllPosts = async (req, res) => {
 }
 
 export const editPost = async (req, res) => {
-  validateBodyParam(req.body, REQUIRED_PARAMS)
   try {
     const doc = await Post.findOneAndUpdate(
       { _id: req.body._id, createdBy: req.headers.authorization },
@@ -60,10 +55,3 @@ export const editPost = async (req, res) => {
       .send({ message: generateErrorMessage(error) })
   }
 }
-
-// if (item.createdBy._id == req.headers.authorization) {
-//   return {
-//     ...item._doc, canEdit: true
-//   }
-// }
-// return { ...item._doc, canEdit: false }

@@ -1,6 +1,6 @@
 import chai from 'chai'
 import request from 'supertest'
-import app from '../../../app'
+import app from '../../app'
 import mongoose from 'mongoose'
 const expect = chai.expect
 

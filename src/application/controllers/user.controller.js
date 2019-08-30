@@ -1,6 +1,6 @@
-import User from './user.model'
-import validateBodyParam from '../../utils/validateBodyParam'
-import generateErrorMessage from '../../utils/generateErrorMessage'
+import User from '../models/user.model'
+import validateBodyParam from '../utils/validateBodyParam'
+import generateErrorMessage from '../utils/generateErrorMessage'
 
 const REQUIRED_PARAMS = ['name', 'nickname']
 
@@ -18,7 +18,7 @@ export const createUser = async (req, res) => {
       .send({ message: generateErrorMessage(error) })
   }
 }
-
+ 
 export const getUser = async (req, res) => {
   try {
     validateBodyParam(req.body, REQUIRED_PARAMS)
